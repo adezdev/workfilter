@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Fondo oscuro */
+    color: #e0e0e0; /* Texto claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo para el contenedor */
+    height: 80vh; /* Alto del contenedor para mantener las proporciones */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+}
+
+.login-container {
+    width: 50%; /* El formulario ocupa el 50% de la pantalla */
+    background-color: #1e1e1e; /* Fondo oscuro para el contenedor del formulario */
+    padding: 40px;
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+    border-radius: 4px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #5cb85c;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+p {
+    margin-top: 15px;
+}
+
+a {
+    color: #5cb85c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la imagen */
+.image-container {
+    width: 50%; /* El contenedor de la imagen ocupa el 50% del espacio */
+    height: 100%; /* Asegura que el contenedor tenga la altura completa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    max-width: 100%; /* Ajusta la imagen para que nunca sea más ancha que el contenedor */
+    max-height: 100%; /* Ajusta la imagen para que nunca sea más alta que el contenedor */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+    border-radius: 10px; /* Opcional: redondea los bordes de la imagen */
+}

@@ -1,0 +1,35 @@
+<div class="espacioTabla">
+        <table class="espacioTabla__tabla">
+            <tr>
+                <td class="tabla__columna tabla__columna--head">id</td>
+                <td class="tabla__columna tabla__columna--head">Nombre</td>
+                <td class="tabla__columna tabla__columna--head">Apellido Paterno</td>
+                <td class="tabla__columna tabla__columna--head">Apellido Materno</td>
+                <td class="tabla__columna tabla__columna--head">Domicilio</td>
+                <td class="tabla__columna tabla__columna--head">Acciónes</td>
+            </tr>
+            <?php while($row = mysqli_fetch_array($query)){ ?>
+            <tr>
+                <td class="tabla__columna">
+                    <?= $row['id']?>
+                </td>
+                <td class="tabla__columna">
+                    <?= $row['nombre']?>
+                </td>
+                <td class="tabla__columna">
+                    <?= $row['apellido_p']?>
+                </td>
+                <td class="tabla__columna">
+                    <?= $row['apellido_m']?>
+                </td>
+                <td class="tabla__columna">
+                    <?= $row['domicilio']?>
+                </td>
+                <td class="tabla__columna tabla__columna--bot"><a href="#" class="tabla__columna--boton">editar</a>
+                    <a href="action/delete.php?id=<?= $row['id']?>"
+                        class="tabla__columna--boton tabla__columna--boton--red">Eliminar</a>
+                </td>
+            </tr>
+            <?php }?>
+        </table>
+    </div>
