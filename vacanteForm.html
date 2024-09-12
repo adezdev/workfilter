@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styleLU.css">
+    <title>Document</title>
+</head>
+<header class="header">
+    <nav class="nav">
+        <div class="nav_cont_logo">
+            <img class="logo__item" src="imagenes/image.png" alt="">
+        </div>
+        <div class="nav_cont_lista">
+            <ul class="nav__lista">
+                <li class="lista__item"><a href="#">Inicio</a></li>
+                <li class="lista__item"><a href="login.html">login in</a></li>
+                <li class="lista__item"><a href="select_sigin.html">sign in</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="contForm">
+        <h1>Agregar Vacante</h1>
+        <form action="action/insertVac.php" method="POST" class="contForm__form">
+            <h3>Titulo:
+            <input type="text" class="form__item" name="titulo">
+            </h3>
+            <h3>Descripción:
+            <input type="text" class="form__item" name="descripcion">
+            </h3>
+            <h3>Requisitos:
+            <input type="text" class="form__item" name="requisitos">
+            </h3>
+            <h3>Salario:
+            <input type="text" class="form__item" name="salario">
+            </h3>
+            <h3>Dirección:
+            <input type="text" class="form__item" name="direccion">
+            </h3>
+            <input type="submit" class="form__item form__item--btn" value="Crear">
+        </form>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styleLU.css">
+    <title>Document</title>
+</head>
+<header class="header">
+    <nav class="nav">
+        <div class="nav_cont_logo">
+            <img class="logo__item" src="imagenes/image.png" alt="">
+        </div>
+        <div class="nav_cont_lista">
+            <ul class="nav__lista">
+                <li class="lista__item"><a href="#">Inicio</a></li>
+                <li class="lista__item"><a href="login.html">login in</a></li>
+                <li class="lista__item"><a href="select_sigin.html">sign in</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="contForm">
+        <h1>Hola candidato</h1>
+        <form action="action/insertCan.php" method="POST" class="contForm__form" enctype="multipart/form-data">
+            <h3>Nombre:
+            <input type="text" class="form__item" name="nombre">
+            </h3>
+            <h3>Apellidos:
+            <input type="text" class="form__item" name="apellidos">
+            </h3>
+            <h3>Email:
+            <input type="text" class="form__item" name="email">
+            </h3>
+            <h3>Télefono:
+            <input type="text" class="form__item" name="telefono">
+            </h3>
+            <h3>Dirección:
+            <input type="text" class="form__item" name="direc">
+            </h3>
+            <h3>Puesto:
+            <input type="text" class="form__item" name="puesto">
+            </h3>   
+            <h3>Enlace externo (Opcional):
+            <input type="text" class="form__item" name="link">
+            </h3>
+            <h3>Contraseña:
+            <input type="password" class="form__item" name="contra">
+            </h3>
+
+            <!-- Campo para subir imagen -->
+            <h3>Subir imagen (Opcional):
+            <input type="file" class="form__item" name="fileTest" id="fileTest">
+            </h3>
+        
+            <input type="submit" class="form__item form__item--btn" value="Crear">
+        </form>
+    </div>
+</body>
+</html>

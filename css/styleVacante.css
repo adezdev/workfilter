@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+/* Fuente y configuración básica del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #1e1e1e;
+}
+
+
+/*-----------------css para tabla----------------------*/
+/* Estilo del contenedor de la tabla con desplazamiento si es necesario */
+.conten-tabla {
+    margin: 20px auto;
+    max-width: 100%;
+    overflow-x: auto; 
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Estilos generales para la tabla */
+table {
+    width: 100%;
+    max-width: 100%; 
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word; 
+}
+
+/* Estilo de los encabezados de la tabla */
+th {
+    background-color: #333; 
+    color: white; 
+    font-weight: bold;
+}
+
+/* Estilo para las filas de la tabla */
+tr:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
+tr:nth-child(odd) {
+    background-color: #fff; /* Color de las filas impares */
+}
+
+/* Estilo al pasar el cursor sobre una fila */
+tr:hover {
+    background-color: #ddd; /* Color de fondo al hacer hover */
+}
+
+/* Estilo para las celdas de la tabla */
+td, th {
+    border: 1px solid #333; /* Bordes negros */
+    padding: 8px;
+}
+.tabla-boton{
+    background-color: #949494; /* fondo */
+    color: white; /* Texto  */
+    border: 2px solid #5a5a5a; /* Borde ligeramente más oscuro */
+    border-radius: 0px; /* Bordes redondeados */
+    padding: 8px 15px; /* Espaciado interno más pequeño */
+    font-size: 14px; /* Tamaño del texto reducido */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+    }
+/*-----------------------------------------------------*/
+
+/* Estilo del encabezado */
+.header {
+    background-color: #333333; /* Azul oscuro */
+    padding: 20px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo__item {
+    height: 50px;
+    width: auto; /* Ajusta el tamaño según necesites */
+}
+
+.nav__lista {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.lista__item a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.lista__item a:hover {
+    background-color: #5cb85c; /* Azul intermedio */
+}
+
+/* Estilo del contenedor principal */
+.ContPrincipal {
+    text-align: center;
+    padding: 20px;
+}
+
+.cabecera__titulo {
+    font-family: 'Arial',sans-serif;
+    font-size: 24px; /* Tamaño de fuente mayor para mejor visibilidad */
+    color: #808080;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px 12px 0 0 ;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Asegura que el texto tome el ancho completo */
+    width: 100%;
+    text-align: center;
+    opacity: 0; /* Inicialmente desvanecido */
+    animation: fadeIn 2s forwards; /* Animación de desvanecimiento */
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.ContImg .fondo {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* Estilo del contenido secundario */
+.contenidoSecundario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.contenidoSecundario__card {
+    flex: 1 1 calc(33% - 20px);
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: #505050;
+}
+
+/* Estilo del pie de página */
+.pieDePagina {
+    background-color: #333333; 
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pieDePagina__info {
+    margin-bottom: 10px;
+}
+
+.pieDePagina__info--espace {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.info__Img {
+    height: 30px;
+    transition: opacity 0.3s;
+}
+
+h4,p{
+    color: #333;
+}
+.contBtn{
+    width: 30%;
+    margin: 10% auto;
+    background-color:#333333;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.contBtn__btn{
+    all: unset;
+    display: block;
+    background-color: #5cb85c;
+    border-radius: 5px;
+    margin-top: 20px ;
+    padding: 20px;
+    cursor: pointer;
+}
+.tituloOp{
+    color: white;
+}
