@@ -1,12 +1,22 @@
 <?php
+// Mostrar todos los errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Iniciar sesión para manejar variables de sesión
 session_start();
 
 // Incluir el archivo de conexión
-include 'conection.php';
+include '../conexión/conection.php';
 
 // Crear la conexión utilizando la función conection()
 $conn = conection(); // Esto reemplaza la conexión manual
+
+// Validar la conexión a la base de datos
+if (!$conn) {
+    die("Error de conexión: " . mysqli_connect_error());
+}
 
 // Recibir datos del formulario
 $user_nombre = $_POST['nombre'];
@@ -18,29 +28,8 @@ $user_contra = $_POST['contra'];
 $user_puesto = $_POST['puesto'];
 $user_link = $_POST['link'];
 
-// ----------------------------------------------------------
-$file = $_FILES["fileTest"]["name"]; //Nombre de nuestro archivo
-
-$url_temp = $_FILES["fileTest"]["tmp_name"]; //Ruta temporal a donde se carga el archivo 
-
-//dirname(_FILE_) nos otorga la ruta absoluta hasta el archivo en ejecución
-$url_insert = dirname(__FILE__) . "/files"; //Carpeta donde subiremos nuestros archivos
-
-//Ruta donde se guardara el archivo, usamos str_replace para reemplazar los "\" por "/"
-$url_target = str_replace('\\', '/', $url_insert) . '/' . $file;
-
-//Si la carpeta no existe, la creamos
-if (!file_exists($url_insert)) {
-    mkdir($url_insert, 0777, true);
-};
-
-//movemos el archivo de la carpeta temporal a la carpeta objetivo y verificamos si fue exitoso
-if (move_uploaded_file($url_temp, $url_target)) {
-    echo "El archivo " . htmlspecialchars(basename($file)) . " ha sido cargado con éxito.";
-} else {
-    echo "Ha habido un error al cargar tu archivo.";
-}
-// ----------------------------------------------------------
+// ------------------------------------------------------------
+// Realizar primero la inserción en la base de datos
 
 // Preparar la consulta SQL para el procedimiento almacenado
 $sql = "CALL sp_InsUser(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -65,29 +54,102 @@ $stmt->bind_param(
 );
 
 // Ejecutar la consulta
-$stmt->execute();
+if (!$stmt->execute()) {
+    die("Error al ejecutar el procedimiento: " . $stmt->error);
+}
 
 // Obtener el resultado de la ejecución
 $result = $stmt->get_result();
 if ($result === false) {
-    die("Error al ejecutar el procedimiento: " . $stmt->error);
+    die("Error al obtener el resultado: " . $stmt->error);
 }
 
-// Obtener el valor devuelto por el procedimiento (0 o 1)
 $row = $result->fetch_assoc();
 $com_estatus = $row['com_estatus'];
 
 // Verificar el valor de retorno (0 = éxito, 1 = correo ya existe)
 if ($com_estatus == '0') {
+    // Aquí continúa el proceso de subida de archivo
+    $stmt->close();
     echo "Usuario insertado exitosamente.";
-    header("Location: ../index.html");
+      // Consulta SELECT para obtener el ID del usuario recién insertado
+      $sql = "SELECT idUsuario FROM usuario WHERE usu_correo = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $user_email);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $row = $result->fetch_assoc();
+      $last_id = $row['idUsuario'];
+
+    
+    // Obtener el último ID insertado (si es necesario para nombrar el archivo)
 } elseif ($com_estatus == '1') {
-    echo "El correo ya existe, no se pudo insertar el usuario.";
+    $stmt->close();
+    die("El correo ya existe, no se pudo insertar el usuario.");
 } else {
-    echo "Error inesperado.";
+    $stmt->close();
+    die("Error inesperado.");
 }
 
-// Cerrar la declaración y la conexión
-$stmt->close();
+
+// Cerrar la declaración SQL antes de proceder con la subida del archivo
+
+
+
+// ------------------------------------------------------------
+// Ahora manejar la subida del archivo (si la inserción fue exitosa)
+
+    if (isset($_FILES['cv']) && $_FILES['cv']['error'] == 0) {
+        // Directorio donde se guardará la imagen
+        $target_dir = "../cv/";
+
+        // Obtener la extensión del archivo
+        $imageFileType = strtolower(pathinfo($_FILES["cv"]["name"], PATHINFO_EXTENSION));
+
+        // Crear un nombre personalizado para la imagen (ejemplo: id_usuario_timestamp.extensión)
+        $custom_file_name = $last_id. "." . $imageFileType;
+
+        // Ruta completa con el nombre personalizado
+        $target_file = $target_dir . $custom_file_name;
+
+        // Verificación del archivo (si es una imagen)
+        $check = getimagesize($_FILES["cv"]["tmp_name"]);
+        if ($check !== false) {
+            // Limitar el tamaño del archivo a 5MB
+            if ($_FILES["cv"]["size"] > 5000000) {
+                die("Lo siento, el archivo es muy grande.");
+            }
+
+            // Permitir solo archivos JPG, JPEG y PNG
+            if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+                die("Lo siento, solo se permiten archivos JPG, JPEG y PNG.");
+            }
+
+            // Verificar si el archivo ya existe
+            if (file_exists($target_file)) {
+                die("Lo siento, el archivo ya existe.");
+            }
+
+            // Si todo está bien, intentar mover el archivo
+            if (move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file)) {
+                echo "El archivo " . htmlspecialchars($custom_file_name) . " ha sido subido exitosamente.";
+            } else {
+                die("Lo siento, hubo un error al subir tu archivo.");
+            }
+        } else {
+            die("El archivo no es una imagen.");
+        }
+    } else {
+        echo "No se subió ningún archivo.";
+    }
+
+
+// ------------------------------------------------------------
+
+// Cerrar la conexión
 $conn->close();
+
+// Redirigir al usuario después de completar el proceso
+header("Location: ../index.html");
+exit();
 ?>
